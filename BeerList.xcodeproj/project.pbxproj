@@ -20,6 +20,9 @@
 		DA1C239726F9EA3E00704F62 /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1C239126F9EA3E00704F62 /* UIStoryboardExtension.swift */; };
 		DA1C239826F9EA3E00704F62 /* BaseWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1C239226F9EA3E00704F62 /* BaseWireframe.swift */; };
 		DA1C239926F9EA3E00704F62 /* ViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1C239326F9EA3E00704F62 /* ViewInterface.swift */; };
+		DA1C239C26F9EC1500704F62 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1C239B26F9EC1500704F62 /* DataSource.swift */; };
+		DA1C239F26F9ED9600704F62 /* BeerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1C239E26F9ED9600704F62 /* BeerEntity.swift */; };
+		DA1C23A126F9F66300704F62 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1C23A026F9F66300704F62 /* CustomError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		DA1C239126F9EA3E00704F62 /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
 		DA1C239226F9EA3E00704F62 /* BaseWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWireframe.swift; sourceTree = "<group>"; };
 		DA1C239326F9EA3E00704F62 /* ViewInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewInterface.swift; sourceTree = "<group>"; };
+		DA1C239B26F9EC1500704F62 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		DA1C239E26F9ED9600704F62 /* BeerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerEntity.swift; sourceTree = "<group>"; };
+		DA1C23A026F9F66300704F62 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,11 +149,10 @@
 		DA1C238C26F9EA0F00704F62 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				DA1C239226F9EA3E00704F62 /* BaseWireframe.swift */,
-				DA1C239126F9EA3E00704F62 /* UIStoryboardExtension.swift */,
-				DA1C238F26F9EA3E00704F62 /* InteractorInterface.swift */,
-				DA1C239026F9EA3E00704F62 /* PresenterInterface.swift */,
-				DA1C239326F9EA3E00704F62 /* ViewInterface.swift */,
+				DA1C239B26F9EC1500704F62 /* DataSource.swift */,
+				DA1C239A26F9EBFA00704F62 /* VIPER_Files */,
+				DA1C239D26F9ED7B00704F62 /* Entities */,
+				DA1C23A026F9F66300704F62 /* CustomError.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -157,6 +162,26 @@
 			children = (
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		DA1C239A26F9EBFA00704F62 /* VIPER_Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA1C239226F9EA3E00704F62 /* BaseWireframe.swift */,
+				DA1C239126F9EA3E00704F62 /* UIStoryboardExtension.swift */,
+				DA1C238F26F9EA3E00704F62 /* InteractorInterface.swift */,
+				DA1C239026F9EA3E00704F62 /* PresenterInterface.swift */,
+				DA1C239326F9EA3E00704F62 /* ViewInterface.swift */,
+			);
+			path = VIPER_Files;
+			sourceTree = "<group>";
+		};
+		DA1C239D26F9ED7B00704F62 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				DA1C239E26F9ED9600704F62 /* BeerEntity.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,10 +317,13 @@
 				DA1C239526F9EA3E00704F62 /* InteractorInterface.swift in Sources */,
 				DA1C239626F9EA3E00704F62 /* PresenterInterface.swift in Sources */,
 				DA1C239826F9EA3E00704F62 /* BaseWireframe.swift in Sources */,
+				DA1C239C26F9EC1500704F62 /* DataSource.swift in Sources */,
 				DA1C239926F9EA3E00704F62 /* ViewInterface.swift in Sources */,
 				DA1C236126F9E9FB00704F62 /* ViewController.swift in Sources */,
 				DA1C235D26F9E9FB00704F62 /* AppDelegate.swift in Sources */,
+				DA1C23A126F9F66300704F62 /* CustomError.swift in Sources */,
 				DA1C235F26F9E9FB00704F62 /* SceneDelegate.swift in Sources */,
+				DA1C239F26F9ED9600704F62 /* BeerEntity.swift in Sources */,
 				DA1C239726F9EA3E00704F62 /* UIStoryboardExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
