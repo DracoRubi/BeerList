@@ -14,10 +14,16 @@ protocol BeerListWireframeInterface: WireframeInterface {
 }
 
 protocol BeerListViewInterface: ViewInterface {
+    func initializeBeerData(withData data: [BeerEntity])
+    func setFilteredBeerData(withData data: [BeerEntity])
 }
 
 protocol BeerListPresenterInterface: PresenterInterface {
+    func onViewDidAppear()
+    func onSearchTextUpdated(text: String)
 }
 
 protocol BeerListInteractorInterface: InteractorInterface {
+    func getBeers(success: @escaping ([BeerEntity]) -> (), failure: @escaping (Error) -> ())
+    func getBeers(withParameters parameters: [String: String], success: @escaping ([BeerEntity]) -> (), failure: @escaping (Error) -> ())
 }

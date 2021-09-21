@@ -11,9 +11,18 @@
 import Foundation
 
 final class BeerListInteractor {
+    let datasource = DataSource()
 }
 
 // MARK: - Extensions -
 
 extension BeerListInteractor: BeerListInteractorInterface {
+    
+    func getBeers(success: @escaping ([BeerEntity]) -> (), failure: @escaping (Error) -> ()) {
+        datasource.getAllBeers(success: success, failure: failure)
+    }
+
+    func getBeers(withParameters parameters: [String : String], success: @escaping ([BeerEntity]) -> (), failure: @escaping (Error) -> ()) {
+        datasource.getBeersWithParameters(parameters: parameters, success: success, failure: failure)
+    }
 }

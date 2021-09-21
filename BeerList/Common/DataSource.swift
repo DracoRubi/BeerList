@@ -17,6 +17,12 @@ class DataSource {
         sendBeerListRequest(success: success, failure: failure)
     }
 
+    public func getBeersWithParameters(parameters: [String : String], success: @escaping ([BeerEntity]) -> (), failure: @escaping (Error) -> ()) {
+        
+        let queryItem = parameters.map { URLQueryItem(name: $0, value: $1) }
+        sendBeerListRequest(withParameters: queryItem, success: success, failure: failure)
+    }
+
     private func sendBeerListRequest(withParameters parameters: [URLQueryItem] = [], success: @escaping ([BeerEntity]) -> (), failure: @escaping (Error) -> ()) {
         
         urlComponents.queryItems = parameters

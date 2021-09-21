@@ -21,14 +21,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="PFd-49-MeR" customClass="BeerCell" customModule="BeerList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="375" height="41.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PFd-49-MeR" id="DZN-Og-F6D">
-                                            <rect key="frame" x="0.0" y="0.0" width="349.5" height="41.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="349.5" height="41"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="BeerName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsH-kY-DZu">
-                                                    <rect key="frame" x="10" y="10" width="329.5" height="21.5"/>
+                                                    <rect key="frame" x="10" y="10" width="329.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

@@ -29,9 +29,36 @@ final class BeerListPresenter {
         self.interactor = interactor
         self.wireframe = wireframe
     }
+    
+    private func getAllBeers() {
+        interactor.getBeers(success: { [weak self] beerList in
+            self?.view.initializeBeerData(withData: beerList)
+        }, failure: { [weak self] error in
+            self?.handleError(error: error)
+        })
+    }
+
+    private func handleError(error: Error) {
+        print("There was an error getting the beers! \n \(error)")
+    }
 }
 
 // MARK: - Extensions -
 
 extension BeerListPresenter: BeerListPresenterInterface {
+    func onViewDidAppear() {
+        getAllBeers()
+    }
+
+    func onSearchTextUpdated(text: String) {
+        if !text.isEmpty {
+            interactor.getBeers(withParameters: [BeerQueryParameters.name: text], success: { [weak self] beerList in
+                self?.view.initializeBeerData(withData: beerList)
+            }, failure: { [weak self] error in
+                self?.handleError(error: error)
+            })
+        } else {
+            getAllBeers()
+        }
+    }
 }

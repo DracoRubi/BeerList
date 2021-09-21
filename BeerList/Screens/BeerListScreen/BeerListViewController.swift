@@ -22,28 +22,46 @@ final class BeerListViewController: UIViewController {
     
     // MARK: - Private properties -
 
-    private var beerList: [BeerEntity] = []
-    private var searchController: UISearchController
+    private var completeBeerList: [BeerEntity] = []
+    private var filteredBeerList: [BeerEntity] = []
+    private var searchController: UISearchController!
+    private var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Lifecycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        initializeTableView()
+        initializeActivityIndicator()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        activityIndicator.startAnimating()
+        presenter.onViewDidAppear()
+    }
+
+    // MARK: - Private methods -
+
+    private func initializeTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(BeerCell.self, forCellReuseIdentifier: BeerCell.identifier)
+
+        searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        tableView.tableHeaderView = searchController.searchBar
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        DataSource().getAllBeers(success: { list in
-            DispatchQueue.main.async {
-                self.beerList = list
-                self.tableView.reloadData()
-            }
-        }, failure: { _ in
-            print("Error getting the beers!")
-        })
+    private func initializeActivityIndicator() {
+        activityIndicator = UIActivityIndicatorView()
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        activityIndicator.color = .black
+        activityIndicator.style = .large
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        tableView.addSubview(activityIndicator)
     }
 
 }
@@ -51,6 +69,21 @@ final class BeerListViewController: UIViewController {
 // MARK: - Extensions -
 
 extension BeerListViewController: BeerListViewInterface {
+    func initializeBeerData(withData data: [BeerEntity]) {
+        completeBeerList = data
+        filteredBeerList = data
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.activityIndicator.stopAnimating()
+        }
+    }
+
+    func setFilteredBeerData(withData data: [BeerEntity]) {
+        filteredBeerList = data
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
 extension BeerListViewController: UITableViewDelegate {
@@ -59,17 +92,26 @@ extension BeerListViewController: UITableViewDelegate {
 
 extension BeerListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return beerList.count
+        return filteredBeerList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: BeerCell.identifier) {
-            cell.textLabel?.text = beerList[indexPath.row].name
+            cell.textLabel?.text = filteredBeerList[indexPath.row].name
             cell.accessoryType = .disclosureIndicator
             return cell
         } else {
             print("Error reusing cell!")
             return UITableViewCell()
         }
+    }
+}
+
+extension BeerListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        let searchText = searchController.searchBar.text ?? ""
+        activityIndicator.startAnimating()
+        presenter.onSearchTextUpdated(text: searchText)
     }
 }
