@@ -46,6 +46,7 @@ final class BeerListPresenter {
 // MARK: - Extensions -
 
 extension BeerListPresenter: BeerListPresenterInterface {
+    
     func onViewDidAppear() {
         getAllBeers()
     }
@@ -60,5 +61,9 @@ extension BeerListPresenter: BeerListPresenterInterface {
         } else {
             getAllBeers()
         }
+    }
+
+    func rowSelectedWithData(data: BeerEntity) {
+        wireframe.presentBeerDetailWithData(data: data)
     }
 }

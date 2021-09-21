@@ -32,4 +32,9 @@ final class BeerListWireframe: BaseWireframe<BeerListViewController> {
 // MARK: - Extensions -
 
 extension BeerListWireframe: BeerListWireframeInterface {
+    func presentBeerDetailWithData(data: BeerEntity) {
+        let detailWireframe = BeerDetailWireframe(beerData: data)
+        detailWireframe.viewController.modalPresentationStyle = .fullScreen
+        viewController.presentWireframe(detailWireframe)
+    }
 }
