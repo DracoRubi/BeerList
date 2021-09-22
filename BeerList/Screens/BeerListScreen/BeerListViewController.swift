@@ -87,7 +87,10 @@ extension BeerListViewController: BeerListViewInterface {
 }
 
 extension BeerListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.rowSelectedWithData(data: filteredBeerList[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension BeerListViewController: UITableViewDataSource {

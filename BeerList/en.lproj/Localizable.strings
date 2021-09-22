@@ -1,0 +1,10 @@
+/* 
+  File.strings
+  BeerList
+
+  Created by Roberto Herranz on 22/9/21.
+  
+*/
+
+"first_brewed_label" = "First brewed in: ";
+"abv_label" = "Alcohol by volume: ";

@@ -11,6 +11,7 @@
 import UIKit
 
 protocol BeerListWireframeInterface: WireframeInterface {
+    func presentBeerDetailWithData(data: BeerEntity)
 }
 
 protocol BeerListViewInterface: ViewInterface {
@@ -21,6 +22,7 @@ protocol BeerListViewInterface: ViewInterface {
 protocol BeerListPresenterInterface: PresenterInterface {
     func onViewDidAppear()
     func onSearchTextUpdated(text: String)
+    func rowSelectedWithData(data: BeerEntity)
 }
 
 protocol BeerListInteractorInterface: InteractorInterface {
