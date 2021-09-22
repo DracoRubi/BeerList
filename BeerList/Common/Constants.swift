@@ -9,4 +9,5 @@ import Foundation
 
 struct BeerQueryParameters: Hashable {
     static let name = "beer_name"
+    static let page = "page"
 }

@@ -23,9 +23,9 @@ final class BeerListViewController: UIViewController {
     // MARK: - Private properties -
 
     private var completeBeerList: [BeerEntity] = []
-    private var filteredBeerList: [BeerEntity] = []
     private var searchController: UISearchController!
     private var activityIndicator: UIActivityIndicatorView!
+    private var oldSearch = ""
     
     // MARK: - Lifecycle -
 
@@ -61,7 +61,7 @@ final class BeerListViewController: UIViewController {
         activityIndicator.style = .large
         activityIndicator.center = view.center
         activityIndicator.hidesWhenStopped = true
-        tableView.addSubview(activityIndicator)
+        view.addSubview(activityIndicator)
     }
 
 }
@@ -69,38 +69,53 @@ final class BeerListViewController: UIViewController {
 // MARK: - Extensions -
 
 extension BeerListViewController: BeerListViewInterface {
+    
     func initializeBeerData(withData data: [BeerEntity]) {
         completeBeerList = data
-        filteredBeerList = data
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.activityIndicator.stopAnimating()
         }
     }
 
-    func setFilteredBeerData(withData data: [BeerEntity]) {
-        filteredBeerList = data
+    func appendBeerData(withData data: [BeerEntity]) {
+        completeBeerList.append(contentsOf: data)
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.activityIndicator.stopAnimating()
         }
     }
+
+    func animateActivityIndicator() {
+        activityIndicator.startAnimating()
+    }
+
 }
 
 extension BeerListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.rowSelectedWithData(data: filteredBeerList[indexPath.row])
+        presenter.rowSelectedWithData(data: completeBeerList[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollViewContentHeight = tableView.contentSize.height
+        let scrollingOffset = scrollViewContentHeight - tableView.bounds.size.height
+        let scrolledPastOffset = scrollView.contentOffset.y > scrollingOffset && tableView.isDragging
+        if scrolledPastOffset {
+            presenter.onTableViewNearingEnd()
+        }
     }
 }
 
 extension BeerListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredBeerList.count
+        return completeBeerList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: BeerCell.identifier) {
-            cell.textLabel?.text = filteredBeerList[indexPath.row].name
+            cell.textLabel?.text = completeBeerList[indexPath.row].name
             cell.accessoryType = .disclosureIndicator
             return cell
         } else {
@@ -112,9 +127,11 @@ extension BeerListViewController: UITableViewDataSource {
 
 extension BeerListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
         let searchText = searchController.searchBar.text ?? ""
-        activityIndicator.startAnimating()
-        presenter.onSearchTextUpdated(text: searchText)
+        if oldSearch != searchText {
+            oldSearch = searchText
+            activityIndicator.startAnimating()
+            presenter.onSearchTextUpdated(text: searchText)
+        }
     }
 }

@@ -16,13 +16,15 @@ protocol BeerListWireframeInterface: WireframeInterface {
 
 protocol BeerListViewInterface: ViewInterface {
     func initializeBeerData(withData data: [BeerEntity])
-    func setFilteredBeerData(withData data: [BeerEntity])
+    func appendBeerData(withData data: [BeerEntity])
+    func animateActivityIndicator()
 }
 
 protocol BeerListPresenterInterface: PresenterInterface {
     func onViewDidAppear()
     func onSearchTextUpdated(text: String)
     func rowSelectedWithData(data: BeerEntity)
+    func onTableViewNearingEnd()
 }
 
 protocol BeerListInteractorInterface: InteractorInterface {
